@@ -48,7 +48,7 @@ export default function InstallSection() {
         <div className="absolute -top-6 left-0 right-0 h-12 bg-black"></div>
 
         <div className="grid grid-cols-2 md:grid-cols-4">
-          {["/g1.png", "/g2.png", "/g3.png", "/g4.png"].map((img, i) => (
+          {["/G1.png", "/G2.png", "/G3.png", "/G4.png"].map((img, i) => (
             <div
               key={i}
               className="relative h-[200px] md:h-[300px] lg:h-[350px] rounded-t-3xl  "
