@@ -1,5 +1,8 @@
 "use client";
 import Image from "next/image";
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const solutions = [
   {
@@ -21,13 +24,26 @@ const solutions = [
 ];
 
 export default function EnergySolutionsGrid() {
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: true,
+      offset: 100,
+    });
+  }, []);
+
   return (
     <section className="w-full bg-white py-20">
       <div className="max-w-7xl mx-auto px-6 text-center -mt-20">
         {/* Grid */}
         <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-x-14 gap-y-16">
           {solutions.map((item, index) => (
-            <div key={index} className="text-center">
+            <div
+              key={index}
+              className="text-center"
+              data-aos="fade-up"
+              data-aos-delay={index * 100}
+            >
               {/* Image */}
               <div className="relative w-full h-[260px] md:h-[500px] rounded-2xl overflow-hidden shadow-lg">
                 <Image
@@ -50,13 +66,17 @@ export default function EnergySolutionsGrid() {
         </div>
 
         {/* Bottom Text */}
-        <p className="mt-16 text-base md:text-xl font-medium text-gray-900 max-w-4xl mx-auto">
+        <p
+          data-aos="fade-up"
+          data-aos-delay="400"
+          className="mt-16 text-base md:text-xl font-medium text-gray-900 max-w-4xl mx-auto"
+        >
           Our EPC-driven approach ensures projects are engineered for
           performance, compliance, and long-term operational excellence.
         </p>
 
         {/* CTA */}
-        <div className="mt-8">
+        <div data-aos="fade-up" data-aos-delay="500" className="mt-8">
           <button className="px-8 py-3 border border-black text-lg font-medium rounded-md hover:bg-black hover:text-white transition">
             Explore Impact
           </button>
@@ -64,7 +84,11 @@ export default function EnergySolutionsGrid() {
       </div>
 
       {/* FULL WIDTH BOTTOM IMAGE */}
-      <div className="relative w-full h-[500px] md:h-screen mt-20">
+      <div
+        data-aos="zoom-in"
+        data-aos-delay="600"
+        className="relative w-full h-[500px] md:h-screen mt-20"
+      >
         <Image
           src="/about1.png"
           alt="Solar Power Infrastructure"

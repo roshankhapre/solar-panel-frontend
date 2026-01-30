@@ -1,24 +1,46 @@
 "use client";
 import Image from "next/image";
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export default function ProductHighlightSection() {
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: true,
+      offset: 100,
+    });
+  }, []);
+
   return (
     <section className="w-full bg-white py-20">
       <div className="max-w-7xl mx-auto px-6">
         {/* Top Heading */}
-        <h2 className="text-center text-2xl md:text-5xl font-semibold text-gray-900">
+        <h2
+          data-aos="fade-down"
+          className="text-center text-2xl md:text-5xl font-semibold text-gray-900"
+        >
           Hithium Hiner – 125 kW / 261 kWh
         </h2>
 
         {/* Top Grid Content */}
-        <div className=" mt-14 grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+        <div className="mt-14 grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
           {/* Left Title */}
-          <h3 className=" text-xl md:text-4xl font-semibold text-gray-900 leading-snug">
+          <h3
+            data-aos="fade-right"
+            data-aos-delay="100"
+            className="text-xl md:text-4xl font-semibold text-gray-900 leading-snug"
+          >
             Standardized, Grid-Ready Energy Storage
           </h3>
 
           {/* Right Description */}
-          <p className=" text-base md:text-lg text-gray-900 md:font-medium leading-relaxed">
+          <p
+            data-aos="fade-left"
+            data-aos-delay="100"
+            className="text-base md:text-lg text-gray-900 md:font-medium leading-relaxed"
+          >
             Joulecube Energy offers the Hithium Hiner 125 kW / 261 kWh Battery
             Energy Storage System, engineered for high performance, safety, and
             reliability. Designed for commercial and industrial applications,
@@ -28,7 +50,11 @@ export default function ProductHighlightSection() {
         </div>
 
         {/* Image */}
-        <div className="mt-14 rounded-2xl overflow-hidden shadow-xl">
+        <div
+          data-aos="zoom-in"
+          data-aos-delay="200"
+          className="mt-14 rounded-2xl overflow-hidden shadow-xl"
+        >
           <Image
             src="/hithium-hiner.png"
             alt="Battery Energy Storage System"

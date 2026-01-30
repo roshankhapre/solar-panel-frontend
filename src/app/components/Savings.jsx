@@ -32,20 +32,37 @@ export default function Savings() {
   ];
 
   const [active, setActive] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  // Handle slide change with animation
+  const handleSlideChange = (index) => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setActive(index);
+
+    setTimeout(() => {
+      setIsAnimating(false);
+    }, 500);
+  };
 
   // AUTO SLIDE LOGIC
   useEffect(() => {
     const interval = setInterval(() => {
+      setIsAnimating(true);
       setActive((prev) => (prev + 1) % slides.length);
+
+      setTimeout(() => {
+        setIsAnimating(false);
+      }, 500);
     }, 4000); // 4 seconds
 
     return () => clearInterval(interval);
   }, [slides.length]);
 
   return (
-    <section className="relative h-screen w-full overflow-hidden font-montserrat">
-      {/* Background */}
-      <div className="absolute inset-0 -z-10">
+    <section className="relative min-h-screen w-full overflow-hidden font-montserrat py-12 sm:py-16 md:py-20">
+      {/* Background with Fade */}
+      <div className="absolute inset-0 -z-10 transition-opacity duration-500">
         <Image
           src="/solar-side.png"
           alt="Solar Background"
@@ -56,39 +73,74 @@ export default function Savings() {
       </div>
 
       {/* Content */}
-      <div className="w-full px-12 mt-28">
+      <div className="w-full px-4 sm:px-6 md:px-12 mt-8 sm:mt-16 md:mt-28">
         <div className="max-w-7xl">
-          {/* Title */}
-          <h2 className="text-[52px] font-bold text-gray-900 leading-tight mb-6 transition-all duration-500">
-            {slides[active].title}
-          </h2>
+          {/* Title - Fade Slide */}
+          <div className="overflow-hidden">
+            <h2
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-[52px] font-bold text-gray-900 leading-tight mb-4 sm:mb-6 transition-all duration-500"
+              style={{
+                opacity: isAnimating ? 0 : 1,
+                transform: isAnimating ? "translateY(20px)" : "translateY(0)",
+              }}
+            >
+              {slides[active].title}
+            </h2>
+          </div>
 
-          {/* First Paragraph */}
-          <p className="text-[24px] leading-relaxed text-black max-w-6xl mb-56 transition-all duration-500">
-            {slides[active].desc1}
-          </p>
+          {/* First Paragraph - Fade Slide */}
+          <div className="overflow-hidden">
+            <p
+              className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-[24px] leading-relaxed text-black max-w-6xl mb-20 sm:mb-32 md:mb-40 lg:mb-56 transition-all duration-500"
+              style={{
+                opacity: isAnimating ? 0 : 1,
+                transform: isAnimating ? "translateY(20px)" : "translateY(0)",
+                transitionDelay: "100ms",
+              }}
+            >
+              {slides[active].desc1}
+            </p>
+          </div>
 
           {/* Slider Indicator */}
-          <div className="flex items-center gap-3 mb-6">
+          <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
             {slides.map((_, index) => (
               <span
                 key={index}
-                onClick={() => setActive(index)}
-                className={`h-[4px] rounded-full cursor-pointer transition-all duration-300 
-                ${active === index ? "w-24 bg-red-500" : "w-10 bg-gray-300"}`}
+                onClick={() => handleSlideChange(index)}
+                className={`h-1 rounded-full cursor-pointer transition-all duration-300 
+                ${active === index ? "w-16 sm:w-20 md:w-24 bg-red-500" : "w-6 sm:w-8 md:w-10 bg-gray-300"}`}
               ></span>
             ))}
           </div>
 
-          {/* Subtitle */}
-          <h4 className="text-[28px] font-semibold text-gray-900 mb-3 transition-all duration-500">
-            {slides[active].subtitle}
-          </h4>
+          {/* Subtitle - Fade Slide */}
+          <div className="overflow-hidden">
+            <h4
+              className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-[28px] font-semibold text-gray-900 mb-3 sm:mb-4 transition-all duration-500"
+              style={{
+                opacity: isAnimating ? 0 : 1,
+                transform: isAnimating ? "translateY(20px)" : "translateY(0)",
+                transitionDelay: "200ms",
+              }}
+            >
+              {slides[active].subtitle}
+            </h4>
+          </div>
 
-          {/* Second Paragraph */}
-          <p className="text-[22px] leading-relaxed text-black max-w-2xl transition-all duration-500">
-            {slides[active].desc2}
-          </p>
+          {/* Second Paragraph - Fade Slide */}
+          <div className="overflow-hidden">
+            <p
+              className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-[22px] leading-relaxed text-black max-w-2xl transition-all duration-500"
+              style={{
+                opacity: isAnimating ? 0 : 1,
+                transform: isAnimating ? "translateY(20px)" : "translateY(0)",
+                transitionDelay: "300ms",
+              }}
+            >
+              {slides[active].desc2}
+            </p>
+          </div>
         </div>
       </div>
     </section>

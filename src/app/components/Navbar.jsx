@@ -23,13 +23,11 @@ export default function Navbar() {
     const handleScroll = () => {
       const currentScroll = window.scrollY;
 
-      // scroll down → hide
-      if (currentScroll > lastScroll.current && currentScroll > 120) {
-        setShow(false);
-      }
-      // scroll up → show
-      else {
+      // Show ONLY at very top
+      if (currentScroll <= 20) {
         setShow(true);
+      } else {
+        setShow(false);
       }
 
       lastScroll.current = currentScroll;
@@ -41,14 +39,14 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full z-50 bg-transparent py-12 font-montserrat transition-transform duration-500 ${
+      className={`fixed top-0 left-0 w-full z-50 bg-transparent py-6 md:py-8 font-montserrat transition-transform duration-500 ${
         show ? "translate-y-0" : "-translate-y-full"
       }`}
     >
-      <div className="max-w-[1600px] mx-auto px-6">
-        <div className="relative flex items-center">
-          {/* LOGO */}
-          <div className="flex items-center shrink-0">
+      <div className="max-w-[1920px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+        <div className="relative flex items-center justify-between">
+          {/* LOGO - Smaller on medium screens */}
+          <div className="flex items-center shrink-0 z-10">
             <Link href="/">
               <Image
                 src="/logo.png"
@@ -56,38 +54,45 @@ export default function Navbar() {
                 width={220}
                 height={54}
                 priority
-                className="object-contain"
+                className="object-contain w-28 sm:w-32 md:w-36 lg:w-40 xl:w-48 2xl:w-56 h-auto"
               />
             </Link>
           </div>
 
-          {/* CENTER MENU (DESKTOP) */}
-          <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center gap-20 whitespace-nowrap">
+          {/* CENTER MENU (DESKTOP) - Adjusted spacing */}
+          <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center gap-4 lg:gap-5 xl:gap-6 2xl:gap-8 whitespace-nowrap z-0">
             {menuItems.map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
-                className="relative text-[18px] font-medium tracking-wide text-white transition group"
+                className="relative text-xs lg:text-sm xl:text-base 2xl:text-lg font-medium tracking-wide text-white transition group px-1"
               >
                 {item.label}
-                <span className="absolute left-0 -bottom-3 h-[3px] w-0 bg-red-500 transition-all duration-300 group-hover:w-full" />
+                <span className="absolute left-1/2 -bottom-2 h-[2px] w-0 bg-red-500 transition-all duration-300 group-hover:w-full group-hover:left-0" />
               </Link>
             ))}
           </div>
 
           {/* RIGHT SIDE */}
-          <div className="flex items-center shrink-0 ml-auto">
+          <div className="flex items-center shrink-0 gap-2 sm:gap-3 md:gap-4 z-10">
             <Link
               href="/contact"
-              className="px-9 py-3.5 text-[18px] font-semibold bg-white text-black hover:bg-gray-100 transition whitespace-nowrap"
+              className="px-3 sm:px-4 md:px-5 lg:px-6 xl:px-8 py-1.5 sm:py-2 md:py-2.5 text-xs sm:text-sm md:text-base lg:text-lg font-semibold bg-white text-black hover:bg-gray-100 transition whitespace-nowrap rounded-sm"
             >
               Contact Us
             </Link>
 
             {/* MOBILE MENU BUTTON */}
-            <div className="lg:hidden ml-4">
-              <button onClick={() => setIsOpen(!isOpen)} className="text-white">
-                {isOpen ? <X size={28} /> : <Menu size={28} />}
+            <div className="lg:hidden">
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="text-white p-1.5"
+              >
+                {isOpen ? (
+                  <X size={20} className="sm:w-6 sm:h-6" />
+                ) : (
+                  <Menu size={20} className="sm:w-6 sm:h-6" />
+                )}
               </button>
             </div>
           </div>
@@ -97,12 +102,12 @@ export default function Navbar() {
       {/* MOBILE MENU */}
       {isOpen && (
         <div className="lg:hidden absolute top-full left-0 right-0 bg-black/95 backdrop-blur-md">
-          <div className="px-6 py-6 space-y-5">
+          <div className="px-6 py-6 space-y-4">
             {menuItems.map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
-                className="block text-white text-xl font-medium"
+                className="block text-white text-lg font-medium py-3"
                 onClick={() => setIsOpen(false)}
               >
                 {item.label}
@@ -111,7 +116,7 @@ export default function Navbar() {
 
             <Link
               href="/contact"
-              className="block w-full mt-4 py-4 bg-white text-black text-xl font-semibold text-center"
+              className="block w-full mt-4 py-4 bg-white text-black text-lg font-semibold text-center rounded"
               onClick={() => setIsOpen(false)}
             >
               Contact Us

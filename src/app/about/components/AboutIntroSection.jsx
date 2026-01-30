@@ -1,24 +1,46 @@
 "use client";
 import Image from "next/image";
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export default function AboutIntroSection() {
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: true,
+      offset: 100,
+    });
+  }, []);
+
   return (
     <section className="w-full bg-white py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-6 text-center">
         {/* Top Heading */}
-        <h2 className="text-2xl md:text-5xl font-semibold text-gray-900 leading-tight whitespace-nowrap">
+        <h2
+          data-aos="fade-down"
+          className="text-2xl md:text-5xl font-semibold text-gray-900 leading-tight whitespace-nowrap"
+        >
           Delivering Reliable Energy Storage Infrastructure for India
         </h2>
 
         {/* Description */}
-        <p className="mt-6 text-lg md:text-3xl md:font-medium text-gray-900 max-w-6xl mx-auto leading-relaxed">
+        <p
+          data-aos="fade-up"
+          data-aos-delay="100"
+          className="mt-6 text-lg md:text-3xl md:font-medium text-gray-900 max-w-6xl mx-auto leading-relaxed"
+        >
           Joulecube Energy is a specialized EPC solutions and long-term service
           provider for Battery Energy Storage Systems (BESS), supporting India’s
           transition to a resilient, flexible, and low-carbon power ecosystem.
         </p>
 
         {/* Image Card */}
-        <div className="mt-16 rounded-2xl overflow-hidden shadow-xl">
+        <div
+          data-aos="zoom-in"
+          data-aos-delay="200"
+          className="mt-16 rounded-2xl overflow-hidden shadow-xl"
+        >
           <Image
             src="/about-section.jpeg"
             alt="Renewable Energy"
@@ -30,7 +52,11 @@ export default function AboutIntroSection() {
         </div>
 
         {/* Bottom Content */}
-        <p className="mt-12 text-lg md:text-3xl md:font-medium text-gray-900 max-w-6xl mx-auto leading-relaxed">
+        <p
+          data-aos="fade-up"
+          data-aos-delay="300"
+          className="mt-12 text-lg md:text-3xl md:font-medium text-gray-900 max-w-6xl mx-auto leading-relaxed"
+        >
           We deliver end-to-end battery energy storage projects—from engineering
           and procurement to construction, commissioning, and life cycle
           services—helping utilities, commercial, and industrial consumers
