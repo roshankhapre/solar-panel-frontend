@@ -65,10 +65,10 @@ export default function FeatureCards() {
 
       {/* FEATURE SLIDER SECTION */}
       <section className="py-24 bg-white overflow-hidden">
-        <div className="max-w-[1800px] ml-auto px-6 ]">
+        <div className="max-w-[1900px] ml-auto px-6 ]">
           <Swiper
             modules={[Pagination]}
-            spaceBetween={40}
+            spaceBetween={90}
             slidesPerView={1.1}
             pagination={{
               clickable: true,
@@ -86,7 +86,7 @@ export default function FeatureCards() {
             {features.map((item, i) => (
               <SwiperSlide key={i}>
                 <div>
-                  <div className="relative w-[] h-[260px] sm:h-[300px] md:h-[600px] rounded-3xl overflow-hidden mb-16">
+                  <div className="relative w-[550] h-[260px] sm:h-[300px] md:h-[600px] rounded-3xl overflow-hidden mb-16">
                     <Image
                       src={item.img}
                       alt={item.title}
@@ -111,8 +111,8 @@ export default function FeatureCards() {
           {/* Custom styles */}
           <style jsx global>{`
             .custom-bullet {
-              width: 32px;
-              height: 4px;
+              width: 52px;
+              height: 6px;
               background: #d1d5db;
               border-radius: 999px;
               transition: all 0.3s ease;

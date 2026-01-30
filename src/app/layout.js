@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className={montserrat.variable}>
       <body className="font-montserrat antialiased">
         <Navbar />
-        {children} {/* ✅ ONLY ONCE */}
+        {children}
         <Footer />
       </body>
     </html>

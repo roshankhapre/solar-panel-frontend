@@ -57,17 +57,17 @@ export default function ServicesSection() {
 
       {/* ================= TEXT BELOW IMAGE ================= */}
       <section className="bg-white px-6 py-20">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-start">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-4 items-start">
           {/* LEFT: Title */}
           <div>
-            <h3 className="text-4xl font-medium text-black">
+            <h3 className="text-5xl  font-semibold text-black -ml-30">
               Getting to Power On
             </h3>
           </div>
 
           {/* RIGHT: Description */}
           <div>
-            <p className="text-gray-600 leading-relaxed text-lg">
+            <p className="max-w-7xl mx-auto text-gray-900 leading-relaxed text-2xl font-medium ">
               It is a long established fact that a reader will be distracted by
               the readable content of a page when looking at its layout. The
               point of using Lorem Ipsum is that it has a more

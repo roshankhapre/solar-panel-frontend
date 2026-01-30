@@ -9,3 +9,8 @@ body {
   background: var(--background);
   color: var(--foreground);
 }
+
+/* 🔥 THIS IS WHAT WAS MISSING */
+.font-montserrat {
+  font-family: var(--font-montserrat), system-ui, sans-serif;
+}

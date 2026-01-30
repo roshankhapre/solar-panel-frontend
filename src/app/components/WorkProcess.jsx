@@ -6,7 +6,7 @@ export default function WorkProcess() {
     <section className="py-20 px-6 bg-white">
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 ">
         {/* LEFT GRID */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 auto-rows-fr">
+        <div className="grid grid-cols-1 max-w-full  md:text-2xl sm:grid-cols-2 gap-6 auto-rows-fr">
           <ProcessCard
             active
             icon={<Bell size={18} />}
@@ -51,7 +51,6 @@ export default function WorkProcess() {
     </section>
   );
 }
-
 function ProcessCard({ icon, title, desc, active = false }) {
   return (
     <div
@@ -66,9 +65,14 @@ function ProcessCard({ icon, title, desc, active = false }) {
       </div>
 
       <div>
-        <h4 className="font-semibold mb-1">{title}</h4>
+        {/* TITLE */}
+        <h4 className="font-semibold text-lg mb-1 whitespace-nowrap">
+          {title}
+        </h4>
+
+        {/* DESCRIPTION */}
         <p
-          className={`text-sm leading-relaxed
+          className={`text-base leading-relaxed
           ${active ? "text-white/80" : "text-gray-600"}`}
         >
           {desc}
