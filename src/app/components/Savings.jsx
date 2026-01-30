@@ -1,19 +1,53 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, EffectFade, Pagination } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/effect-fade";
-import "swiper/css/pagination";
 
 export default function Savings() {
+  const slides = [
+    {
+      title: "Save On Electricity Bills",
+      desc1:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+      subtitle: "Monthly Bill Savings",
+      desc2:
+        "It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    },
+    {
+      title: "Switch To Clean Solar Energy",
+      desc1:
+        "Solar energy is a powerful and sustainable source of energy that helps reduce carbon emissions and lowers dependency on fossil fuels for electricity generation.",
+      subtitle: "Eco Friendly Power",
+      desc2:
+        "Solar panels convert sunlight into electricity, helping households and businesses move toward a greener and more sustainable future.",
+    },
+    {
+      title: "Long Term Cost Benefits",
+      desc1:
+        "Investing in solar panels ensures long-term cost savings, energy independence, and protection against rising electricity prices.",
+      subtitle: "Lifetime Savings",
+      desc2:
+        "With minimal maintenance and long lifespan, solar systems deliver consistent performance and financial benefits over decades.",
+    },
+  ];
+
+  const [active, setActive] = useState(0);
+
+  // AUTO SLIDE LOGIC
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActive((prev) => (prev + 1) % slides.length);
+    }, 4000); // 4 seconds
+
+    return () => clearInterval(interval);
+  }, [slides.length]);
+
   return (
-    <section className="relative h-screen w-full overflow-hidden flex items-center">
-      {/* Background Image - FULL SCREEN */}
+    <section className="relative h-screen w-full overflow-hidden font-montserrat">
+      {/* Background */}
       <div className="absolute inset-0 -z-10">
         <Image
-          src="/solar-side.jpeg"
+          src="/solar-side.png"
           alt="Solar Background"
           fill
           priority
@@ -21,142 +55,42 @@ export default function Savings() {
         />
       </div>
 
-      {/* Soft White Overlay - EXACTLY 70% opacity */}
-      <div className="absolute inset-0 "></div>
+      {/* Content */}
+      <div className="w-full px-12 mt-28">
+        <div className="max-w-7xl">
+          {/* Title */}
+          <h2 className="text-[52px] font-bold text-gray-900 leading-tight mb-6 transition-all duration-500">
+            {slides[active].title}
+          </h2>
 
-      {/* Content Wrapper - Left side only */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="max-w-xl">
-          <Swiper
-            modules={[Autoplay, EffectFade, Pagination]}
-            effect="fade"
-            autoplay={{
-              delay: 5000,
-              disableOnInteraction: false,
-            }}
-            loop={true}
-            speed={800}
-            pagination={{
-              clickable: true,
-              renderBullet: function (index, className) {
-                return `<span class="${className} custom-bullet"></span>`;
-              },
-            }}
-            className="savings-slider"
-          >
-            <SwiperSlide>
-              <SlideContent
-                title="Save On Electricity Bills"
-                desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                subTitle="Monthly Bill Savings"
-                subDesc="It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-              />
-            </SwiperSlide>
+          {/* First Paragraph */}
+          <p className="text-[24px] leading-relaxed text-black max-w-6xl mb-56 transition-all duration-500">
+            {slides[active].desc1}
+          </p>
 
-            <SwiperSlide>
-              <SlideContent
-                title="Clean Renewable Energy"
-                desc="Switching to solar power reduces your carbon footprint significantly. Our high-efficiency panels generate clean energy while protecting the environment for future generations."
-                subTitle="Environmental Impact"
-                subDesc="Each solar installation reduces carbon emissions equivalent to planting hundreds of trees annually. Join the green revolution today."
-              />
-            </SwiperSlide>
+          {/* Slider Indicator */}
+          <div className="flex items-center gap-3 mb-6">
+            {slides.map((_, index) => (
+              <span
+                key={index}
+                onClick={() => setActive(index)}
+                className={`h-[4px] rounded-full cursor-pointer transition-all duration-300 
+                ${active === index ? "w-24 bg-red-500" : "w-10 bg-gray-300"}`}
+              ></span>
+            ))}
+          </div>
 
-            <SwiperSlide>
-              <SlideContent
-                title="Increase Home Value"
-                desc="Solar panel installations can increase your property value by up to 4.1%. Homes with solar sell faster and at premium prices in today's market."
-                subTitle="Property Investment"
-                subDesc="Beyond energy savings, solar panels are a smart financial investment that pays dividends when you decide to sell your property."
-              />
-            </SwiperSlide>
+          {/* Subtitle */}
+          <h4 className="text-[28px] font-semibold text-gray-900 mb-3 transition-all duration-500">
+            {slides[active].subtitle}
+          </h4>
 
-            <SwiperSlide>
-              <SlideContent
-                title="Energy Independence"
-                desc="Protect yourself from rising electricity prices and grid outages. Generate your own power and gain control over your energy costs."
-                subTitle="Power Security"
-                subDesc="With battery storage options, you can store excess energy for use during peak hours or power outages, ensuring uninterrupted power supply."
-              />
-            </SwiperSlide>
-          </Swiper>
+          {/* Second Paragraph */}
+          <p className="text-[22px] leading-relaxed text-black max-w-2xl transition-all duration-500">
+            {slides[active].desc2}
+          </p>
         </div>
       </div>
-
-      {/* Custom CSS for exact design */}
-      <style jsx global>{`
-        .savings-slider {
-          overflow: visible !important;
-        }
-
-        .savings-slider .swiper-slide {
-          opacity: 0 !important;
-          transition: opacity 0.8s ease;
-        }
-
-        .savings-slider .swiper-slide-active {
-          opacity: 1 !important;
-        }
-
-        /* Custom pagination bullets */
-        .custom-bullet {
-          width: 30px;
-          height: 3px;
-          background-color: rgba(107, 114, 128, 0.3);
-          border-radius: 0;
-          display: inline-block;
-          margin: 0 3px !important;
-          cursor: pointer;
-          transition: all 0.3s ease;
-        }
-
-        .custom-bullet.swiper-pagination-bullet-active {
-          background-color: #ef4444 !important;
-          width: 40px;
-        }
-
-        /* Hide default pagination container styles */
-        .swiper-pagination-bullets {
-          bottom: -40px !important;
-          text-align: left !important;
-          padding-left: 10px;
-        }
-
-        /* Make sure image covers entire background */
-        .absolute.inset-0.-z-10 {
-          z-index: 0;
-        }
-      `}</style>
     </section>
-  );
-}
-
-function SlideContent({ title, desc, subTitle, subDesc }) {
-  return (
-    <div className="pt-8">
-      {/* Main Title */}
-      <h2 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-        {title}
-      </h2>
-
-      {/* Main Description */}
-      <p className="text-gray-700 text-lg leading-relaxed mb-10 max-w-lg">
-        {desc}
-      </p>
-
-      {/* Progress Indicator - RED LINE */}
-      <div className="flex items-center gap-2 mb-8">
-        <span className="w-103 bg-red-500"></span>
-        <span className="w-6  bg-gray-300"></span>
-        <span className="w-6  bg-gray-300"></span>
-        <span className="w-6  bg-gray-300"></span>
-      </div>
-
-      {/* Sub Title */}
-      <h4 className="font-semibold text-xl text-gray-900 mb-4">{subTitle}</h4>
-
-      {/* Sub Description */}
-      <p className="text-gray-600 leading-relaxed max-w-lg">{subDesc}</p>
-    </div>
   );
 }

@@ -1,132 +1,46 @@
 "use client";
 
 import Image from "next/image";
+
 import { useEffect, useRef, useState } from "react";
 
 export default function Maintenance() {
-  const [inView1, setInView1] = useState(false);
   const [inView2, setInView2] = useState(false);
-  const section1Ref = useRef(null);
   const section2Ref = useRef(null);
+
+  const section0Ref = useRef(null);
+  const lastScrollY = useRef(0);
+  const [showSticky, setShowSticky] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.target === section1Ref.current) {
-            setInView1(entry.isIntersecting);
-          }
-          if (entry.target === section2Ref.current) {
-            setInView2(entry.isIntersecting);
-          }
-        });
-      },
-      { threshold: 0.2 },
+      ([entry]) => setInView2(entry.isIntersecting),
+      { threshold: 0.25 },
     );
 
-    if (section1Ref.current) observer.observe(section1Ref.current);
     if (section2Ref.current) observer.observe(section2Ref.current);
 
-    return () => {
-      if (section1Ref.current) observer.unobserve(section1Ref.current);
-      if (section2Ref.current) observer.unobserve(section2Ref.current);
-    };
+    return () => observer.disconnect();
   }, []);
 
   return (
-    <div>
-      {/* SECTION 1: Maintenance Guide */}
+    <div className="relative">
+      {/* SECTION 0 – STICKY */}
       <section
-        ref={section1Ref}
-        className="py-12 md:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-white"
+        ref={section0Ref}
+        className="sticky top-0 z-40 bg-white border-b-0 "
       >
-        <div className="max-w-6xl mx-auto">
-          <div
-            className={`text-center mb-8 md:mb-12 lg:mb-16 transition-all duration-1000 transform ${
-              inView1 ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-            }`}
+        <div className="max-w-7xl mx-auto px-6 py-12 md:py-16 text-center">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-gray-900 mb-4 lg:whitespace-nowrap">
+            Solar Maintenance Made Easy: A Homeowner's Guide
+          </h2>
+
+          <p
+            className="text-gray-900 text-base sm:text-lg md:text-2xl md:font-medium 
+              max-w-7xl -mx-1 leading-relaxed 
+              indent-[-7rem] pl-[7rem]
+"
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-medium text-gray-900 mb-3 md:mb-4 lg:mb-6 leading-tight">
-              Solar Maintenance Made Easy: <br />A Homeowner&apos;s Guide
-            </h2>
-            <p className="text-gray-600 text-sm sm:text-base max-w-2xl mx-auto px-4">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry&apos;s standard dummy
-              text ever since the 1500s.
-            </p>
-          </div>
-
-          <div
-            className={`flex justify-center mb-8 md:mb-10 lg:mb-12 transition-all duration-1000 delay-300 ${
-              inView1 ? "opacity-100" : "opacity-0"
-            }`}
-          >
-            <div className="w-16 h-[1px] bg-gray-300"></div>
-          </div>
-
-          <div
-            className={`grid md:grid-cols-2 gap-8 md:gap-10 lg:gap-12 items-center transition-all duration-1000 delay-500 ${
-              inView1 ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-            }`}
-          >
-            <div className="order-2 md:order-1">
-              <div className="flex gap-2 mb-4 md:mb-5 lg:mb-6">
-                <span className="w-8 h-[2px] bg-red-500"></span>
-                <span className="w-4 h-[2px] bg-gray-300"></span>
-                <span className="w-4 h-[2px] bg-gray-300"></span>
-              </div>
-              <h3 className="text-lg md:text-xl font-medium text-gray-900 mb-2 md:mb-3 lg:mb-4">
-                Generate Energy
-              </h3>
-              <p className="text-gray-600 text-sm md:text-base leading-relaxed">
-                It is a long established fact that a reader will be distracted
-                by the readable content of a page when looking at its layout.
-              </p>
-            </div>
-
-            <div className="relative h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] rounded-lg md:rounded-xl overflow-hidden shadow-lg order-1 md:order-2 transition-transform duration-500 hover:scale-105">
-              <Image
-                src="/maintenance.jpeg"
-                alt="Solar Panel Maintenance"
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 50vw"
-                priority
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 2: Sleek and Durable - Full width image */}
-      <section
-        ref={section2Ref}
-        className="relative h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] xl:h-[700px] w-full overflow-hidden"
-      >
-        <div className="absolute inset-0">
-          <Image
-            src="/solar-bg.jpeg"
-            alt="Sleek Solar Panels"
-            fill
-            className="object-cover"
-            sizes="100vw"
-            priority
-          />
-        </div>
-
-        {/* Dark overlay for better text readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
-
-        {/* Text overlay */}
-        <div
-          className={`absolute bottom-6 sm:bottom-8 md:bottom-12 lg:bottom-16 left-4 sm:left-6 md:left-8 lg:left-12 xl:left-16 max-w-xs sm:max-w-sm md:max-w-md text-white transition-all duration-1000 transform ${
-            inView2 ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-          }`}
-        >
-          <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium mb-2 sm:mb-3 md:mb-4 leading-tight">
-            Sleek and Durable
-          </h3>
-          <p className="text-gray-200 text-sm sm:text-base md:text-lg leading-relaxed">
             Lorem Ipsum is simply dummy text of the printing and typesetting
             industry. Lorem Ipsum has been the industry's standard dummy text
             ever since the 1500s, when an unknown printer took a galley of type
@@ -134,6 +48,96 @@ export default function Maintenance() {
           </p>
         </div>
       </section>
+
+      {/* SECTION 1 */}
+      <section className="py-10 md:py-20 bg-white">
+        <div className="max-w-[1700px] mx-auto px-6">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-16">
+            {/* TEXT */}
+            <div className="lg:w-[42%] text-left mb-1">
+              <span className="block w-20 h-[6px] bg-red-500 rounded mb-4"></span>
+
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold mb-5 ">
+                Generate Energy
+              </h2>
+
+              <p className="text-gray-900 text-base md:text-2xl md:font-medium max-w-xl">
+                It is a long established fact that a reader will be distracted
+                by the readable content of a page when looking at its layout.
+              </p>
+            </div>
+
+            {/* IMAGE */}
+            <div className="lg:w-[58%] flex justify-end">
+              <div className="relative h-[280px] sm:h-[340px] md:h-[420px] lg:h-[580px] w-full max-w-[760px] rounded-3xl overflow-hidden shadow-xl">
+                <img
+                  src="/maintenance.jpeg"
+                  alt=""
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 2 */}
+      <section className="py-20 md:py-28 bg-white">
+        <div className="max-w-[1700px] mx-auto px-6">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-20">
+            {/* IMAGE - LEFT */}
+            <div className="lg:w-[58%] flex justify-start">
+              <div className="relative h-[280px] sm:h-[340px] md:h-[420px] lg:h-[480px] w-full max-w-[760px] rounded-3xl overflow-hidden shadow-xl">
+                <img
+                  src="/energy-room.png"
+                  alt=""
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+
+            {/* TEXT - RIGHT */}
+            <div className="lg:w-[42%] min-w-xl text-left ml-20 mb-20">
+              <span className="block w-20 h-[6px] bg-red-500 rounded mb-4"></span>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold mb-5">
+                Use Energy
+              </h2>
+              <p className="text-gray-900 text-base md:text-lg lg:text-2xl lg:font-medium max-w-xl">
+                It is a long established fact that a reader will be distracted
+                by the readable content of a page when looking at its layout.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 3 */}
+      <section className="py-20 md:py-28 bg-white">
+        <div className="max-w-[1700px] mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_1.4fr] gap-12 items-center">
+            <div>
+              <span className="block w-20 h-[6px] bg-red-500 rounded mb-4"></span>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold mb-5">
+                Store Any Extra
+              </h2>
+              <p className="text-gray-900 text-base md:text-lg lg:text-2xl lg:font-medium max-w-xl">
+                It is a long established fact that a reader will be distracted
+                by the readable content of a page when looking at its layout.
+              </p>
+            </div>
+
+            <div className="relative h-[280px] sm:h-[340px] md:h-[420px] lg:h-[480px] w-full max-w-[760px] rounded-3xl overflow-hidden shadow-xl">
+              <img
+                src="/battery-home.png"
+                alt=""
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 4 – FULL WIDTH IMAGE */}
     </div>
   );
 }

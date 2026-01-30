@@ -1,19 +1,16 @@
-import FeatureCards from "./components/FeatureCards";
-import Footer from "./components/Footer";
 import Hero from "./components/Hero";
-import InstallSection from "./components/InstallSection";
-import Maintenance from "./components/Maintenance";
-import Navbar from "./components/Navbar";
-import PowerBackup from "./components/PowerBackup";
-import ProcessTimeline from "./components/ProcessTimeline";
 import Savings from "./components/Savings";
+import Maintenance from "./components/Maintenance";
+import FeatureCards from "./components/FeatureCards";
+import PowerBackup from "./components/PowerBackup";
 import ServicesSection from "./components/ServicesSection";
+import ProcessTimeline from "./components/ProcessTimeline";
 import WorkProcess from "./components/WorkProcess";
+import InstallSection from "./components/InstallSection";
 
 export default function Home() {
   return (
     <>
-      <Navbar />
       <Hero />
       <Savings />
       <Maintenance />
@@ -23,7 +20,6 @@ export default function Home() {
       <ProcessTimeline />
       <WorkProcess />
       <InstallSection />
-      <Footer />
     </>
   );
 }

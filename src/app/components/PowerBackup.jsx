@@ -18,16 +18,17 @@ export default function PowerBackup() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
 
         <div className="relative h-full flex items-end">
-          <div className="pb-16 pl-6 md:pl-16 max-w-2xl">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+          <div className="pb-16 pl-6 md:pl-16 max-w-7xl">
+            <h2 className="text-4xl md:text-5xl font-medium text-white mb-6 ">
               Grid Goes Down,
               <br />
               Lights Stay On
             </h2>
-            <p className="text-gray-200 text-lg">
+            <p className="text-gray-100 text-3xl py-4">
               Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry&apos;s standard dummy
-              text ever since the 1500s.
+              industry. Lorem Ipsum has been the industry's standard dummy text
+              ever since the 1500s, when an unknown printer took a galley of
+              type and scrambled it to make a type specimen book.
             </p>
           </div>
         </div>
