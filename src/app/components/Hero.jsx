@@ -111,7 +111,9 @@ export default function Hero() {
 
       {/* TOP RIGHT RED SHAPE - Slide In */}
       <div
-        className={`absolute top-0 right-2 sm:right-6 md:right-10 z-[2] transition-all duration-700 delay-200 ${isVisible ? "opacity-50 translate-x-0" : "opacity-0 translate-x-10"}`}
+        className={`hidden md:block absolute top-0 right-2 sm:right-6 md:right-10 z-[2] transition-all duration-700 delay-200 ${
+          isVisible ? "opacity-50 translate-x-0" : "opacity-0 translate-x-10"
+        }`}
       >
         <Image
           src="/top-red-line.png"
@@ -125,7 +127,9 @@ export default function Hero() {
 
       {/* BOTTOM RIGHT RED SHAPE - Slide In */}
       <div
-        className={`absolute bottom-0 right-2 sm:right-6 md:right-10 z-[2] transition-all duration-700 delay-300 ${isVisible ? "opacity-50 translate-x-0" : "opacity-0 translate-x-10"}`}
+        className={`hidden md:block absolute bottom-0 right-2 sm:right-6 md:right-10 z-[2] transition-all duration-700 delay-300 ${
+          isVisible ? "opacity-50 translate-x-0" : "opacity-0 translate-x-10"
+        }`}
       >
         <Image
           src="/down-red-line.png"

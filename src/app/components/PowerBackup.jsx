@@ -155,19 +155,19 @@ export default function PowerBackup() {
                 : "translate-x-8 opacity-0 scale-95"
             }`}
           >
-            <div className="relative w-full max-w-[350px] xs:max-w-[400px] sm:max-w-[450px] md:max-w-[500px] lg:max-w-[550px] xl:max-w-[650px] 2xl:max-w-[750px] group">
+            <div className="relative w-full max-w-[350px] xs:max-w-[400px] sm:max-w-[450px] md:max-w-[500px] lg:max-w-[550px] xl:max-w-[650px] 2xl:max-w-[950px] group">
               <div className="relative aspect-[4/5] lg:aspect-[5/6] xl:aspect-[4/5]">
                 <Image
-                  src="/monitor-man1.jpeg"
+                  src="/1.png"
                   alt="Man monitoring solar system"
                   fill
-                  className="object-contain transition-transform duration-700 group-hover:scale-105"
+                  className="object-contain "
                   sizes="(max-width: 768px) 90vw, (max-width: 1024px) 50vw, (max-width: 1280px) 45vw, 750px"
                   priority
                 />
               </div>
               {/* Subtle shadow effect on hover */}
-              <div className="absolute inset-0 shadow-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"></div>
+              <div className="absolute inset-0 shadow-2xl opacity-0 "></div>
             </div>
           </div>
         </div>
