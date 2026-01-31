@@ -1,16 +1,15 @@
 export default function Footer() {
   return (
-    <footer className="bg-black text-white py-20 px-6">
+    <footer className="bg-black text-white py-20 px-6 font-montserrat">
       <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-12 items-start">
-
         {/* LEFT BRAND */}
         <div>
           <h2 className="text-2xl font-semibold mb-6">joulecube®</h2>
 
           <p className="text-gray-400 leading-relaxed max-w-sm">
             It is a long established fact that a reader will be distracted by
-            the readable content of a page when looking at its layout. The
-            point of using Lorem Ipsum is that it has a
+            the readable content of a page when looking at its layout. The point
+            of using Lorem Ipsum is that it has a
           </p>
         </div>
 
@@ -43,7 +42,6 @@ export default function Footer() {
             <span className="cursor-pointer">▶</span>
           </div>
         </div>
-
       </div>
     </footer>
   );

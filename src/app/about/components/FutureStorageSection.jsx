@@ -14,12 +14,12 @@ export default function FutureStorageSection() {
   }, []);
 
   return (
-    <section className="w-full bg-white overflow-hidden">
+    <section className="w-full bg-white overflow-hidden font-montserrat">
       {/* Top Content */}
       <div className="max-w-7xl mx-auto px-6 text-center py-14">
         <h2
           data-aos="fade-down"
-          className="text-2xl md:text-5xl font-bold text-gray-900"
+          className="text-2xl md:text-5xl font-semibold text-black"
         >
           The Future Is Storage-Led
         </h2>
@@ -27,7 +27,8 @@ export default function FutureStorageSection() {
         <p
           data-aos="fade-up"
           data-aos-delay="100"
-          className="mt-4 text-base md:text-2xl md:font-medium text-gray-900 max-w-4xl mx-auto"
+          className=" mt-4 text-lg md:text-3xl md:font-medium text-black leading-relaxed
+            w-full text-center"
         >
           As renewable penetration increases, energy storage is becoming the
           backbone of India's power infrastructure.
@@ -57,7 +58,8 @@ export default function FutureStorageSection() {
         <p
           data-aos="fade-up"
           data-aos-delay="300"
-          className="text-base md:text-2xl md:font-medium text-gray-900 max-w-4xl mx-auto"
+          className=" mt-12 text-lg md:text-3xl md:font-medium text-black leading-relaxed
+            w-full text-center"
         >
           At Joulecube Energy, we design and execute utility-scale and C&I
           Battery Energy Storage Solutions that enable:

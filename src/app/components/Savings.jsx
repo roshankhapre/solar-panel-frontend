@@ -73,7 +73,7 @@ export default function Savings() {
       </div>
 
       {/* Content */}
-      <div className="w-full px-4 sm:px-6 md:px-12 mt-8 sm:mt-16 md:mt-28">
+      <div className="w-full px-4 sm:px-6 md:px-12 mt-4 sm:mt-10 md:mt-20">
         <div className="max-w-7xl">
           {/* Title - Fade Slide */}
           <div className="overflow-hidden">

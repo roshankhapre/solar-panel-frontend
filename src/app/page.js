@@ -7,6 +7,7 @@ import ServicesSection from "./components/ServicesSection";
 import ProcessTimeline from "./components/ProcessTimeline";
 import WorkProcess from "./components/WorkProcess";
 import InstallSection from "./components/InstallSection";
+import Durable from "./components/Durable";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <Hero />
       <Savings />
       <Maintenance />
+      <Durable/>
       <FeatureCards />
       <PowerBackup />
       <ServicesSection />

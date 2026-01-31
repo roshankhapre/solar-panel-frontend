@@ -89,7 +89,7 @@ export default function Hero() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen w-full overflow-hidden"
+      className="relative min-h-screen w-full overflow-hidden font-montserrat"
     >
       {/* Background with Fade In */}
       <div
@@ -111,32 +111,38 @@ export default function Hero() {
 
       {/* TOP RIGHT RED SHAPE - Slide In */}
       <div
-        className={`hidden md:block absolute top-0 right-2 sm:right-6 md:right-10 z-[2] transition-all duration-700 delay-200 ${
-          isVisible ? "opacity-50 translate-x-0" : "opacity-0 translate-x-10"
-        }`}
+        className={`hidden md:block absolute right-2 sm:right-6 md:right-10 z-[2]
+  transition-all duration-700 delay-200
+  ${isVisible ? "opacity-50 translate-x-0" : "opacity-0 translate-x-10"}`}
+        style={{
+          top: "50%",
+          transform: "translateY(-480px)", // ⬅️ MORE UP
+        }}
       >
         <Image
           src="/top-red-line.png"
           alt="top red line"
           width={110}
           height={220}
-          priority
           className="object-contain w-[70px] sm:w-[90px] md:w-[110px]"
         />
       </div>
 
       {/* BOTTOM RIGHT RED SHAPE - Slide In */}
       <div
-        className={`hidden md:block absolute bottom-0 right-2 sm:right-6 md:right-10 z-[2] transition-all duration-700 delay-300 ${
-          isVisible ? "opacity-50 translate-x-0" : "opacity-0 translate-x-10"
-        }`}
+        className={`hidden md:block absolute right-2 sm:right-6 md:right-10 z-[2]
+  transition-all duration-700 delay-300
+  ${isVisible ? "opacity-50 translate-x-0" : "opacity-0 translate-x-10"}`}
+        style={{
+          top: "50%",
+          transform: "translateY(-200px)", // ⬅️ MOVED UP
+        }}
       >
         <Image
           src="/down-red-line.png"
           alt="down red line"
           width={110}
           height={360}
-          priority
           className="object-contain w-[70px] sm:w-[90px] md:w-[110px]"
         />
       </div>

@@ -33,7 +33,7 @@ export default function EnergySolutionsGrid() {
   }, []);
 
   return (
-    <section className="w-full bg-white py-20">
+    <section className="w-full bg-white py-20 font-montserrat">
       <div className="max-w-7xl mx-auto px-6 text-center -mt-20">
         {/* Grid */}
         <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-x-14 gap-y-16">
@@ -58,7 +58,8 @@ export default function EnergySolutionsGrid() {
               <div className="w-96 h-[6px] bg-black mx-auto mt-5" />
 
               {/* Title */}
-              <h3 className="mt-3 text-lg md:text-2xl font-medium text-gray-900">
+              <h3 className=" mt-12 text-lg md:text-4xl md:font-semibold text-black leading-relaxed
+            w-full text-center">
                 {item.title}
               </h3>
             </div>
@@ -69,15 +70,16 @@ export default function EnergySolutionsGrid() {
         <p
           data-aos="fade-up"
           data-aos-delay="400"
-          className="mt-16 text-base md:text-xl font-medium text-gray-900 max-w-4xl mx-auto"
+          className=" mt-12 text-lg md:text-3xl md:font-medium text-black leading-relaxed
+            w-full text-center"
         >
           Our EPC-driven approach ensures projects are engineered for
           performance, compliance, and long-term operational excellence.
         </p>
 
         {/* CTA */}
-        <div data-aos="fade-up" data-aos-delay="500" className="mt-8">
-          <button className="px-8 py-3 border border-black text-lg font-medium rounded-md hover:bg-black hover:text-white transition">
+        <div data-aos="fade-up" data-aos-delay="500" className="mt-10">
+          <button className="px-9 py-4 border-2 border-black text-xl font-medium rounded-md hover:bg-black hover:text-white transition">
             Explore Impact
           </button>
         </div>

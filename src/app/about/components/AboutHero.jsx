@@ -1,28 +1,35 @@
 "use client";
 import Image from "next/image";
-import { useEffect } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
+import { useEffect, useRef, useState } from "react";
 
 export default function AboutHero() {
-  // Initialize AOS
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+
   useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      once: true,
-      offset: 100,
-      easing: "ease-in-out",
-    });
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 },
+    );
+
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
   }, []);
 
   return (
-    <section className="relative w-full h-[520px] md:h-[650px] overflow-hidden">
-      {/* Background Image with Parallax Effect */}
+    <section
+      ref={sectionRef}
+      className="relative w-full h-[520px] md:h-[650px] overflow-hidden font-Kumbh Sans"
+    >
+      {/* Background Image */}
       <div
-        data-aos="zoom-in"
-        data-aos-duration="1500"
-        data-aos-easing="ease-out"
-        className="absolute inset-0"
+        className={`absolute inset-0 transition-opacity duration-1000 ${
+          isVisible ? "opacity-100" : "opacity-0"
+        }`}
       >
         <Image
           src="/aboutus-hero.png"
@@ -30,19 +37,51 @@ export default function AboutHero() {
           fill
           priority
           className="object-cover"
-          sizes="100vw"
         />
       </div>
 
-      {/* Animated Gradient Overlay */}
+      {/* Dark Gradient Overlay */}
       <div
-        className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/30"
-        data-aos="fade-in"
-        data-aos-delay="300"
+        className={`absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/30 z-[1]
+        transition-opacity duration-1000 ${
+          isVisible ? "opacity-100" : "opacity-0"
+        }`}
       />
 
-      {/* Floating Particles Effect */}
-      <div className="absolute inset-0 overflow-hidden">
+      {/* TOP RIGHT RED BAR */}
+      <div
+        className={`hidden md:block absolute right-2 sm:right-6 md:right-10 z-[2]
+        transition-all duration-700 delay-200
+        ${isVisible ? "opacity-50 translate-x-0" : "opacity-0 translate-x-10"}`}
+        style={{ top: "50%", transform: "translateY(-450px)" }}
+      >
+        <Image
+          src="/top-red-line.png"
+          alt="top red line"
+          width={110}
+          height={220}
+          className="object-contain w-[70px] sm:w-[90px] md:w-[110px]"
+        />
+      </div>
+
+      {/* BOTTOM RIGHT RED BAR */}
+      <div
+        className={`hidden md:block absolute right-2 sm:right-6 md:right-10 z-[2]
+        transition-all duration-700 delay-300
+        ${isVisible ? "opacity-50 translate-x-0" : "opacity-0 translate-x-10"}`}
+        style={{ top: "50%", transform: "translateY(-200px)" }}
+      >
+        <Image
+          src="/down-red-line.png"
+          alt="down red line"
+          width={110}
+          height={360}
+          className="object-contain w-[70px] sm:w-[90px] md:w-[110px]"
+        />
+      </div>
+
+      {/* Floating Particles */}
+      <div className="absolute inset-0 overflow-hidden z-[2]">
         {[...Array(20)].map((_, i) => (
           <div
             key={i}
@@ -58,144 +97,48 @@ export default function AboutHero() {
       </div>
 
       {/* TEXT CONTENT */}
-      <div className="absolute inset-0 flex items-center justify-center px-6">
+      <div className="absolute inset-0 flex items-center justify-center px-6 z-[3]">
         <div className="text-center text-white max-w-3xl">
-          {/* Main Title with Staggered Letters Animation */}
           <h1
-            className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight"
-            data-aos="fade-down"
-            data-aos-delay="500"
+            className={`text-4xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight
+            transition-all duration-700 ${
+              isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-10"
+            }`}
           >
-            <span className="inline-block overflow-hidden">
-              <span className="inline-block animate-slide-up">About us</span>
-            </span>
+            About us
           </h1>
 
-          {/* Subtitle with Typewriter Effect */}
           <p
-            className="text-lg md:text-2xl lg:text-3xl text-white/90 mb-8"
-            data-aos="fade-up"
-            data-aos-delay="700"
+            className={`text-lg md:text-2xl lg:text-3xl text-white/90
+            transition-all duration-700 delay-200 ${
+              isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-10"
+            }`}
           >
-            <span className="inline-block overflow-hidden">
-              <span className="inline-block animate-typewriter">
-                Powering India's Clean Energy Transition
-              </span>
-            </span>
+            Powering India's Clean Energy Transition
           </p>
-
-     
         </div>
       </div>
 
-      {/* CSS Animations */}
+      {/* Animations */}
       <style jsx global>{`
         @keyframes float {
           0%,
           100% {
-            transform: translateY(0) translateX(0);
+            transform: translateY(0);
             opacity: 0.3;
           }
           50% {
-            transform: translateY(-20px) translateX(10px);
+            transform: translateY(-20px);
             opacity: 0.7;
-          }
-        }
-
-        @keyframes slideUp {
-          from {
-            transform: translateY(100%);
-            opacity: 0;
-          }
-          to {
-            transform: translateY(0);
-            opacity: 1;
-          }
-        }
-
-        @keyframes typewriter {
-          from {
-            width: 0;
-          }
-          to {
-            width: 100%;
-          }
-        }
-
-        @keyframes glow {
-          0%,
-          100% {
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-          }
-          50% {
-            text-shadow:
-              0 0 20px rgba(255, 255, 255, 0.6),
-              0 0 30px rgba(255, 255, 255, 0.3);
           }
         }
 
         .animate-float {
           animation: float infinite linear;
-        }
-
-        .animate-slide-up {
-          animation: slideUp 1s ease-out forwards;
-          animation-delay: 0.5s;
-          opacity: 0;
-        }
-
-        .animate-typewriter {
-          animation: typewriter 2s steps(40) 1s forwards;
-          overflow: hidden;
-          white-space: nowrap;
-          width: 0;
-        }
-
-        .animate-glow {
-          animation: glow 2s ease-in-out infinite;
-        }
-
-        /* AOS Custom Animations */
-        [data-aos="fade-down"] {
-          opacity: 0;
-          transform: translateY(-50px);
-          transition-property: transform, opacity;
-        }
-
-        [data-aos="fade-down"].aos-animate {
-          opacity: 1;
-          transform: translateY(0);
-        }
-
-        [data-aos="fade-up"] {
-          opacity: 0;
-          transform: translateY(50px);
-          transition-property: transform, opacity;
-        }
-
-        [data-aos="fade-up"].aos-animate {
-          opacity: 1;
-          transform: translateY(0);
-        }
-
-        [data-aos="zoom-in"] {
-          opacity: 0;
-          transform: scale(1.1);
-          transition-property: transform, opacity;
-        }
-
-        [data-aos="zoom-in"].aos-animate {
-          opacity: 1;
-          transform: scale(1);
-        }
-
-        [data-aos="fade-in"] {
-          opacity: 0;
-          transition-property: opacity;
-        }
-
-        [data-aos="fade-in"].aos-animate {
-          opacity: 1;
         }
       `}</style>
     </section>

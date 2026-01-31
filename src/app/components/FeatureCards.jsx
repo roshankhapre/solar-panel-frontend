@@ -66,56 +66,10 @@ export default function FeatureCards() {
 
   return (
     <>
-      {/* HERO SECTION */}
-      <section
-        ref={heroRef}
-        className="relative w-full h-screen overflow-hidden"
-      >
-        {/* Background Image with Fade In */}
-        <div
-          className={`absolute inset-0 transition-opacity duration-1000 ${heroVisible ? "opacity-100" : "opacity-0"}`}
-        >
-          <Image
-            src="/solar-bg.jpeg"
-            alt="Sleek Solar House"
-            fill
-            priority
-            className="object-cover"
-          />
-        </div>
-
-        {/* Dark Gradient Overlay with Fade In */}
-        <div
-          className={`absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent z-10 transition-opacity duration-1000 ${heroVisible ? "opacity-100" : "opacity-0"}`}
-        ></div>
-
-        {/* Text Content with Slide Up */}
-        <div className="absolute bottom-4 sm:bottom-8 md:bottom-16 lg:bottom-32 left-3 sm:left-6 md:left-12 lg:left-24 z-20 max-w-xs sm:max-w-sm md:max-w-2xl lg:max-w-7xl text-white pr-4 sm:pr-0">
-          <div
-            className={`transition-all duration-700 delay-100 ${heroVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
-          >
-            <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold mb-2 sm:mb-3 md:mb-4 leading-tight">
-              Sleek and Durable
-            </h3>
-          </div>
-
-          <div
-            className={`transition-all duration-700 delay-300 ${heroVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
-          >
-            <p className="text-gray-50 text-xs sm:text-sm md:text-lg lg:text-2xl xl:text-3xl leading-relaxed">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book.
-            </p>
-          </div>
-        </div>
-      </section>
-
       {/* FEATURE SLIDER SECTION */}
       <section
         ref={sliderRef}
-        className="py-12 sm:py-16 md:py-24 bg-white overflow-hidden"
+        className="py-12 sm:py-16 md:py-24 bg-white overflow-hidden font-montserrat"
       >
         <div className="max-w-[1900px] ml-auto px-4 sm:px-6 lg:px-8 overflow-visible">
           {/* Swiper Container with Fade In */}
@@ -167,9 +121,23 @@ export default function FeatureCards() {
                 <SwiperSlide key={i}>
                   <div className="pr-4 sm:pr-6 md:pr-8">
                     {/* Image with Scale In */}
-                    <div
-                      className={`relative w-full h-40 sm:h-48 md:h-80 lg:h-96 rounded-2xl sm:rounded-3xl overflow-hidden mb-4 sm:mb-8 md:mb-12 lg:mb-16 transition-all duration-500 delay-${200 + i * 100} ${sliderVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}
-                    >
+<div
+  className={`relative
+    w-full                     /* ✅ MOBILE – same as last time */
+    md:max-w-[clamp(480px,42vw,650px)]  /* ✅ LAPTOP + DESKTOP */
+    h-56
+    sm:h-64
+    md:h-[420px]
+    lg:h-[480px]
+    rounded-2xl sm:rounded-3xl overflow-hidden
+    mb-4 sm:mb-8 md:mb-12 lg:mb-16
+    transition-all duration-500 delay-${200 + i * 100}
+    ${sliderVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}
+>
+
+
+
+
                       <Image
                         src={item.img}
                         alt={item.title}

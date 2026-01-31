@@ -3,7 +3,7 @@ import { Bell, ClipboardCheck, Wrench } from "lucide-react";
 
 export default function WorkProcess() {
   return (
-    <section className="py-20 px-6 bg-white">
+    <section className="py-20 px-6 bg-white font-montserrat">
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 ">
         {/* LEFT GRID */}
         <div className="grid grid-cols-1 max-w-full  md:text-2xl sm:grid-cols-2 gap-6 auto-rows-fr">

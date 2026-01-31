@@ -35,7 +35,7 @@ export default function PowerBackup() {
       {/* SECTION 1 - HERO */}
       <section
         ref={heroRef}
-        className="relative h-[90vh] xs:h-[85vh] sm:h-[80vh] md:h-[75vh] lg:h-[80vh] w-full overflow-hidden"
+        className="relative h-[90vh] xs:h-[85vh] sm:h-[80vh] md:h-[75vh] lg:h-[80vh] w-full overflow-hidden font-montserrat"
       >
         <div className="absolute inset-0">
           <Image
@@ -61,7 +61,7 @@ export default function PowerBackup() {
             <div className="max-w-4xl lg:max-w-5xl xl:max-w-6xl">
               {/* Title with fade-up animation */}
               <h2
-                className={`text-2xl xs:text-[26px] sm:text-2xl md:text-3xl lg:text-[50px] xl:text-[54px] font-semibold text-white mb-4 sm:mb-5 md:mb-6 leading-tight transition-all duration-700 delay-100 ${
+                className={`text-2xl xs:text-[20px] sm:text-xl md:text-2xl lg:text-[40px] xl:text-[42px] font-semibold text-white mb-4 sm:mb-5 md:mb-6 leading-tight transition-all duration-700 delay-100 ${
                   heroVisible
                     ? "translate-y-0 opacity-100"
                     : "translate-y-8 opacity-0"
@@ -74,14 +74,16 @@ export default function PowerBackup() {
 
               {/* Subtitle with fade-up animation */}
               <p
-                className={`text-gray-100 text-lg xs:text-xl sm:text-xl md:text-2xl lg:text-[28px] xl:text-[28px] leading-relaxed max-w-3xl md:max-w-4xl font-medium transition-all duration-700 delay-300 ${
+                className={`text-gray-100 text-sm xs:text-lg sm:text-lg md:text-xl lg:text-[20px] xl:text-[21px] leading-relaxed max-w-3xl md:max-w-4xl font-medium transition-all duration-700 delay-300 ${
                   heroVisible
                     ? "translate-y-0 opacity-100"
                     : "translate-y-8 opacity-0"
                 }`}
               >
                 Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry.
+                industry. Lorem Ipsum has been the industry's standard dummy
+                text ever since the 1500s, when an unknown printer took a galley
+                of type and scrambled it to make a type specimen book.
               </p>
             </div>
           </div>
