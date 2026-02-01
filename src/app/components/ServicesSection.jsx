@@ -104,7 +104,6 @@ export default function ServicesSection() {
 
             {/* CARD 3 */}
             <div className="sticky top-72 sm:top-80 z-50 mt-12">
-
               <div
                 className={`${cardBase} delay-300 ${
                   isVisible
@@ -122,9 +121,6 @@ export default function ServicesSection() {
           </div>
         </div>
       </section>
-
-      
-
     </>
   );
 }

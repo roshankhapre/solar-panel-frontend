@@ -31,36 +31,55 @@ const features = [
 ];
 
 export default function FeatureCards() {
+  const heroRef = useRef(null);
   const sliderRef = useRef(null);
+  const [heroVisible, setHeroVisible] = useState(false);
   const [sliderVisible, setSliderVisible] = useState(false);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => entry.isIntersecting && setSliderVisible(true),
+    const heroObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHeroVisible(true);
+        }
+      },
       { threshold: 0.1 },
     );
 
-    if (sliderRef.current) observer.observe(sliderRef.current);
-    return () => observer.disconnect();
+    const sliderObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setSliderVisible(true);
+        }
+      },
+      { threshold: 0.1 },
+    );
+
+    if (heroRef.current) heroObserver.observe(heroRef.current);
+    if (sliderRef.current) sliderObserver.observe(sliderRef.current);
+
+    return () => {
+      if (heroRef.current) heroObserver.unobserve(heroRef.current);
+      if (sliderRef.current) sliderObserver.unobserve(sliderRef.current);
+    };
   }, []);
 
   return (
     <>
+      {/* FEATURE SLIDER SECTION */}
       <section
         ref={sliderRef}
-        className="py-12 sm:py-16 md:py-24 bg-white font-montserrat overflow-x-hidden"
+        className="py-12 sm:py-16 md:py-24 bg-white overflow-hidden font-montserrat"
       >
-        {/* ✅ FIX: ml-auto only on desktop */}
-        <div className="max-w-[1900px] mx-auto lg:ml-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1900px] ml-auto px-4 sm:px-6 lg:px-8 overflow-visible">
+          {/* Swiper Container with Fade In */}
           <div
-            className={`transition-opacity duration-700 ${
-              sliderVisible ? "opacity-100" : "opacity-0"
-            }`}
+            className={`transition-opacity duration-700 delay-100 ${sliderVisible ? "opacity-100" : "opacity-0"}`}
           >
             <Swiper
               modules={[Pagination]}
-              slidesPerView={1}
-              spaceBetween={24}
+              spaceBetween={80}
+              slidesPerView={1.1}
               pagination={{
                 clickable: true,
                 el: ".custom-pagination",
@@ -68,16 +87,32 @@ export default function FeatureCards() {
                 bulletActiveClass: "custom-bullet-active",
               }}
               breakpoints={{
-                640: {
+                320: {
+                  slidesPerView: 1,
+                  spaceBetween: 30,
+                },
+                480: {
                   slidesPerView: 1.2,
-                  spaceBetween: 32,
+                  spaceBetween: 40,
+                },
+                640: {
+                  slidesPerView: 1.4,
+                  spaceBetween: 50,
                 },
                 768: {
-                  slidesPerView: 1.6,
-                  spaceBetween: 48,
+                  slidesPerView: 1.8,
+                  spaceBetween: 60,
                 },
                 1024: {
-                  slidesPerView: 2.5,
+                  slidesPerView: 2.5, // Show 2 full + half of third
+                  spaceBetween: 80,
+                },
+                1280: {
+                  slidesPerView: 2.5, // Maintain the half-hidden effect
+                  spaceBetween: 80,
+                },
+                1536: {
+                  slidesPerView: 2.5, // Maintain the half-hidden effect
                   spaceBetween: 80,
                 },
               }}
@@ -85,19 +120,24 @@ export default function FeatureCards() {
               {features.map((item, i) => (
                 <SwiperSlide key={i}>
                   <div className="pr-4 sm:pr-6 md:pr-8">
-                    {/* IMAGE */}
-                    <div
-                      className={`
-                        relative
-                        w-full
-                        h-48 sm:h-56 md:h-[420px] lg:h-[480px]
-                        rounded-2xl sm:rounded-3xl
-                        overflow-hidden
-                        mb-4 sm:mb-8 md:mb-12
-                        transition-all duration-500
-                        ${sliderVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"}
-                      `}
-                    >
+                    {/* Image with Scale In */}
+<div
+  className={`relative
+    w-full                     /* ✅ MOBILE – same as last time */
+    md:max-w-[clamp(480px,42vw,650px)]  /* ✅ LAPTOP + DESKTOP */
+    h-56
+    sm:h-64
+    md:h-[420px]
+    lg:h-[480px]
+    rounded-2xl sm:rounded-3xl overflow-hidden
+    mb-4 sm:mb-8 md:mb-12 lg:mb-16
+    transition-all duration-500 delay-${200 + i * 100}
+    ${sliderVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}
+>
+
+
+
+
                       <Image
                         src={item.img}
                         alt={item.title}
@@ -106,44 +146,98 @@ export default function FeatureCards() {
                       />
                     </div>
 
-                    {/* TITLE */}
-                    <h3 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-semibold mb-2 sm:mb-4">
-                      {item.title}
-                    </h3>
+                    {/* Title with Slide Up */}
+                    <div
+                      className={`transition-all duration-500 delay-${300 + i * 100} ${sliderVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"}`}
+                    >
+                      <h3 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-semibold mb-2 sm:mb-3 md:mb-4">
+                        {item.title}
+                      </h3>
+                    </div>
 
-                    {/* DESCRIPTION */}
-                    <p className="text-gray-900 font-medium text-xs sm:text-sm md:text-lg lg:text-xl xl:text-2xl leading-relaxed">
-                      {item.desc}
-                    </p>
+                    {/* Description with Slide Up */}
+                    <div
+                      className={`transition-all duration-500 delay-${400 + i * 100} ${sliderVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"}`}
+                    >
+                      <p className="max-w-7xl text-gray-900 font-medium text-xs sm:text-sm md:text-lg lg:text-xl xl:text-2xl leading-relaxed">
+                        {item.desc}
+                      </p>
+                    </div>
                   </div>
                 </SwiperSlide>
               ))}
             </Swiper>
           </div>
 
-          {/* PAGINATION */}
-          <div className="custom-pagination flex gap-2 sm:gap-4 mt-8 sm:mt-12" />
+          {/* LINE INDICATORS with Fade In */}
+          <div
+            className={`custom-pagination flex items-center gap-2 sm:gap-3 md:gap-4 mt-8 sm:mt-12 transition-opacity duration-700 delay-600 ${sliderVisible ? "opacity-100" : "opacity-0"}`}
+          ></div>
 
-          {/* STYLES */}
+          {/* Custom styles */}
           <style jsx global>{`
             .custom-bullet {
-              width: 32px;
+              width: 40px;
               height: 4px;
               background: #d1d5db;
               border-radius: 999px;
               transition: all 0.3s ease;
+              cursor: pointer;
+            }
+
+            @media (min-width: 768px) {
+              .custom-bullet {
+                width: 52px;
+                height: 6px;
+              }
             }
 
             .custom-bullet-active {
+              width: 36px;
               background: #ef4444;
-              width: 40px;
             }
 
+            @media (min-width: 768px) {
+              .custom-bullet-active {
+                width: 48px;
+              }
+            }
+
+            /* Hide overflow only on the right side for desktop */
             @media (min-width: 1024px) {
-              .swiper,
+              .swiper {
+                overflow: visible;
+              }
+
               .swiper-wrapper {
                 overflow: visible;
               }
+            }
+
+            /* Delay classes */
+            .delay-200 {
+              transition-delay: 200ms;
+            }
+            .delay-300 {
+              transition-delay: 300ms;
+            }
+            .delay-400 {
+              transition-delay: 400ms;
+            }
+            .delay-500 {
+              transition-delay: 500ms;
+            }
+            .delay-600 {
+              transition-delay: 600ms;
+            }
+            .delay-700 {
+              transition-delay: 700ms;
+            }
+            .delay-800 {
+              transition-delay: 800ms;
+            }
+            .delay-900 {
+              transition-delay: 900ms;
             }
           `}</style>
         </div>
