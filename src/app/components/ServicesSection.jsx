@@ -38,7 +38,7 @@ export default function ServicesSection() {
       >
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 sm:gap-16 lg:gap-24 items-start">
           {/* LEFT CONTENT */}
-          <div className="sticky top-24 h-fit">
+          <div className="relative lg:sticky lg:top-24 h-fit">
             <div
               className={`transition-all duration-700 ease-out ${
                 isVisible
@@ -66,7 +66,15 @@ export default function ServicesSection() {
           </div>
 
           {/* ================= RIGHT STICKY STACK ================= */}
-          <div className="relative h-[950px] lg:h-[1200px]">
+          <div
+            className="
+    relative
+    min-h-[1400px]
+    sm:min-h-[1500px]
+    lg:min-h-[1600px]
+    pb-32
+  "
+          >
             {/* CARD 1 */}
             <div className="sticky top-16 z-30">
               <div
