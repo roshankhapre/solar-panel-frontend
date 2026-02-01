@@ -130,15 +130,15 @@ function ServiceCard({ icon, title, text, red }) {
   return (
     <div
       className={`rounded-3xl
-      p-8 sm:p-10 lg:p-12
+      p-6 sm:p-8 lg:p-10     /* ⬅️ smaller padding */
       w-full
-      flex flex-col gap-6
+      flex flex-col gap-5   /* ⬅️ tighter spacing */
       overflow-hidden
       ${red ? "bg-red-600 text-white" : "bg-gray-50 text-black"}`}
     >
-      {/* ICON */}
+      {/* ICON (slightly smaller) */}
       <div
-        className={`w-18 h-18 sm:w-20 sm:h-20
+        className={`w-16 h-16 sm:w-18 sm:h-18
         rounded-full flex items-center justify-center
         ${red ? "bg-white text-red-600" : "bg-black text-white"}`}
       >
@@ -146,25 +146,25 @@ function ServiceCard({ icon, title, text, red }) {
       </div>
 
       {/* TEXT + ARROW */}
-      <div className="flex justify-between items-end gap-12">
+      <div className="flex justify-between items-end gap-10">
         {/* TEXT */}
         <div className="flex-1 min-w-0">
-          <h4 className="text-xl sm:text-3xl lg:text-4xl font-semibold mb-3 whitespace-nowrap">
+          <h4 className="text-lg sm:text-2xl lg:text-3xl font-semibold mb-2 whitespace-nowrap">
             {title}
           </h4>
 
-          <p className="text-sm sm:font-medium lg:text-xl leading-relaxed opacity-90">
+          <p className="text-sm sm:text-base lg:text-lg leading-relaxed opacity-90">
             {text}
           </p>
         </div>
 
-        {/* ARROW — stays inside */}
+        {/* ARROW (smaller & balanced) */}
         <div
-          className={`w-16 h-16 rounded-full border
+          className={`w-12 h-12 rounded-full border
           flex items-center justify-center shrink-0
           ${red ? "border-white" : "border-gray-400"}`}
         >
-          <ArrowUpRight size={20} />
+          <ArrowUpRight size={16} />
         </div>
       </div>
     </div>
