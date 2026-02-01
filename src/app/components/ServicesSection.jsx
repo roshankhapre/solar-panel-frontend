@@ -131,9 +131,9 @@ function ServiceCard({ icon, title, text, red }) {
     <div
       className={`rounded-3xl
       p-8 sm:p-10 lg:p-12
-      pr-20 sm:pr-28 lg:pr-36
       w-full
       flex flex-col gap-6
+      overflow-hidden
       ${red ? "bg-red-600 text-white" : "bg-gray-50 text-black"}`}
     >
       {/* ICON */}
@@ -145,30 +145,26 @@ function ServiceCard({ icon, title, text, red }) {
         {icon}
       </div>
 
-      {/* TEXT + ARROW LAYOUT */}
-      <div className="flex justify-between gap-12">
-        {/* TEXT BLOCK */}
-        <div className="flex-1">
-          {/* TITLE — ONE LINE ONLY */}
+      {/* TEXT + ARROW */}
+      <div className="flex justify-between items-end gap-12">
+        {/* TEXT */}
+        <div className="flex-1 min-w-0">
           <h4 className="text-xl sm:text-3xl lg:text-4xl font-semibold mb-3 whitespace-nowrap">
             {title}
           </h4>
 
-          {/* DESCRIPTION */}
           <p className="text-sm sm:font-medium lg:text-xl leading-relaxed opacity-90">
             {text}
           </p>
         </div>
 
-        {/* ARROW — BOTTOM RIGHT */}
-        <div className="flex items-end">
-          <div
-            className={`w-16 h-16 rounded-full border
-            flex items-center justify-center shrink-0
-            ${red ? "border-white" : "border-gray-400"}`}
-          >
-            <ArrowUpRight size={20} />
-          </div>
+        {/* ARROW — stays inside */}
+        <div
+          className={`w-16 h-16 rounded-full border
+          flex items-center justify-center shrink-0
+          ${red ? "border-white" : "border-gray-400"}`}
+        >
+          <ArrowUpRight size={20} />
         </div>
       </div>
     </div>
