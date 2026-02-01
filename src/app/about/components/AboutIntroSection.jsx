@@ -22,7 +22,7 @@ export default function AboutIntroSection() {
           data-aos="fade-down"
           className="
             text-2xl md:text-5xl font-semibold text-black leading-tight
-            text-center whitespace-nowrap
+            text-center 
           "
         >
           Delivering Reliable Energy Storage Infrastructure for India
