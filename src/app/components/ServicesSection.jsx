@@ -138,9 +138,9 @@ function ServiceCard({ icon, title, text, red }) {
   return (
     <div
       className={`rounded-3xl
-      p-6 sm:p-7 lg:p-10     /* ⬅️ smaller padding */
+      p-6 sm:p-8 lg:p-10     /* ⬅️ smaller padding */
       w-full
-      flex flex-col gap-4   /* ⬅️ tighter spacing */
+      flex flex-col gap-5   /* ⬅️ tighter spacing */
       overflow-hidden
       ${red ? "bg-red-600 text-white" : "bg-gray-50 text-black"}`}
     >

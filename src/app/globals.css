@@ -210,3 +210,6 @@ body {
 .image-hover-zoom:hover {
   transform: scale(1.05);
 }
+body {
+  overflow-x: hidden;
+}
