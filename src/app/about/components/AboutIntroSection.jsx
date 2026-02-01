@@ -21,9 +21,12 @@ export default function AboutIntroSection() {
         <h2
           data-aos="fade-down"
           className="
-            text-2xl md:text-5xl font-semibold text-black leading-tight
-            text-center 
-          "
+    text-2xl sm:text-3xl md:text-5xl
+    font-semibold text-black leading-tight
+    text-center
+    max-w-full
+    break-words
+  "
         >
           Delivering Reliable Energy Storage Infrastructure for India
         </h2>
