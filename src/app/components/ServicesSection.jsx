@@ -138,11 +138,12 @@ function ServiceCard({ icon, title, text, red }) {
   return (
     <div
       className={`rounded-3xl
-      p-6 sm:p-8 lg:p-10     /* ⬅️ smaller padding */
-      w-full
-      flex flex-col gap-5   /* ⬅️ tighter spacing */
-      overflow-hidden
-      ${red ? "bg-red-600 text-white" : "bg-gray-50 text-black"}`}
+  p-5 -ml-1 sm:p-7 lg:p-10
+  w-full max-w-[80%] sm:max-w-full
+  mx-auto
+  flex flex-col gap-4
+  overflow-hidden
+  ${red ? "bg-red-600 text-white" : "bg-gray-50 text-black"}`}
     >
       {/* ICON (slightly smaller) */}
       <div
@@ -154,7 +155,7 @@ function ServiceCard({ icon, title, text, red }) {
       </div>
 
       {/* TEXT + ARROW */}
-      <div className="flex justify-between items-end gap-10">
+      <div className="flex justify-between items-end gap-6 sm:gap-10">
         {/* TEXT */}
         <div className="flex-1 min-w-0">
           <h4 className="text-lg sm:text-2xl lg:text-3xl font-semibold mb-2 whitespace-nowrap">
