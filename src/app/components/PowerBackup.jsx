@@ -35,7 +35,7 @@ export default function PowerBackup() {
       {/* SECTION 1 - HERO */}
       <section
         ref={heroRef}
-        className="relative h-[90vh] xs:h-[85vh] sm:h-[80vh] md:h-[75vh] lg:h-[80vh] w-full overflow-hidden font-montserrat"
+        className="relative h-[90vh] xs:h-[85vh] sm:h-[80vh] md:h-[75vh] lg:h-[80vh] w-full overflow-hidden font-montserrat "
       >
         <div className="absolute inset-0">
           <Image

@@ -2,6 +2,7 @@ import { Montserrat, Kumbh_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import CursorFollower from "./components/CursorFollower";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -25,6 +26,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className={`${montserrat.variable} ${kumbhSans.variable}`}>
       <body className="font-montserrat antialiased">
         <Navbar />
+         <CursorFollower />
         {children}
         <Footer />
       </body>
