@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 
-const partners = [
+const batteryPartners = [
   { name: "Hithium", logo: "/partners/hithium.png" },
   { name: "Gotion", logo: "/partners/gotion.png" },
   { name: "EVE Energy", logo: "/partners/eve.png" },
@@ -13,57 +13,80 @@ const partners = [
   { name: "Kore Power", logo: "/partners/korepower.png" },
 ];
 
+const pcsPartners = [
+  { name: "Deye", logo: "/partners/deye.png" },
+  { name: "Sungrow", logo: "/partners/sungrow.png" },
+  { name: "Hopewind", logo: "/partners/hopewind.png" },
+  { name: "Sineng", logo: "/partners/sineng.png" },
+  { name: "ABB", logo: "/partners/abb.png" },
+  { name: "Fimer", logo: "/partners/fimer.png" },
+  { name: "Indrivetec", logo: "/partners/indrivetec.png" },
+  { name: "TMEIC", logo: "/partners/tmeic.png" },
+  { name: "Fuji Electric", logo: "/partners/fuji.png" },
+  { name: "SMA", logo: "/partners/sma.png" },
+  { name: "Kehua", logo: "/partners/kehua.png" },
+  { name: "Dynapower", logo: "/partners/dynapower.png" },
+];
+
 export default function PartnersSection() {
   return (
-    <section className="bg-white py-32 font-montserrat">
-      {/* ⬅️ WIDER CONTAINER */}
-      <div className="max-w-[1600px] mx-auto px-10">
-        {/* GRID */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-x-20 gap-y-28 place-items-center">
-          {partners.map((partner, index) => (
-            <div
-              key={index}
-              className={`
-                w-[440px] h-[440px]
-                bg-white rounded-xl
-                shadow-[0_12px_35px_rgba(0,0,0,0.12)]
-                flex flex-col items-center justify-center
-                text-center
-                transition-all duration-300
-                hover:-translate-y-2 hover:shadow-[0_22px_50px_rgba(0,0,0,0.18)]
+    <section className="bg-white py-24 font-montserrat">
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-12">
 
-                ${
-                  index % 3 === 1
-                    ? "md:-mt-24"   // ⬆️ ONLY MIDDLE CARD UP
-                    : "md:mt-0"
-                }
-              `}
-            >
-              {/* LOGO */}
-              <div className="relative w-[300px] h-[200px] -mb-2">
-                <Image
-                  src={partner.logo}
-                  alt={partner.name}
-                  fill
-                  className="object-contain"
-                />
-              </div>
+        {/* ================= BATTERIES GRID ================= */}
+        <PartnersGrid title="Batteries" items={batteryPartners} />
 
-              {/* TEXT */}
-              <h4 className="text-5xl font-medium text-black mb-2">
-                Batteries
-              </h4>
+        {/* Divider */}
+        <div className="my-24 h-px bg-black/80 w-full" />
 
-              <span className="text-2xl font-medium text-gray-600 hover:text-black cursor-pointer transition-colors">
-                Learn more
-              </span>
-            </div>
-          ))}
-        </div>
-
-        {/* DIVIDER */}
-        <div className="mt-36 h-px bg-gray-300 w-full" />
+        {/* ================= PCS / INVERTERS GRID ================= */}
+        <PartnersGrid title="PCS / INVERTERS" items={pcsPartners} />
       </div>
     </section>
+  );
+}
+
+/* ================= REUSABLE GRID ================= */
+function PartnersGrid({ title, items }) {
+  return (
+    <div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-12 gap-y-24 place-items-center">
+        {items.map((item, index) => (
+          <div
+            key={index}
+            className={`
+              w-full max-w-[360px] aspect-square
+              bg-white rounded-xl
+              shadow-[0_8px_30px_rgba(0,0,0,0.12)]
+              flex flex-col items-center justify-center
+              text-center p-6
+              transition-all duration-300
+              hover:-translate-y-2 hover:shadow-[0_18px_45px_rgba(0,0,0,0.18)]
+              ${index % 3 === 1 ? "md:-mt-20" : ""}
+            `}
+          >
+            {/* Logo */}
+            <div className="relative w-full h-32 mb-4">
+              <Image
+                src={item.logo}
+                alt={item.name}
+                fill
+                className="object-contain"
+              />
+            </div>
+
+            {/* Category */}
+            <h4 className="text-2xl md:text-3xl font-medium text-black">
+              {title}
+            </h4>
+
+            {/* CTA */}
+            <span className="mt-1 text-sm md:text-base font-medium text-gray-600 hover:text-black cursor-pointer">
+              Learn more
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }

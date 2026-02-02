@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
+import { Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import { useEffect, useRef, useState } from "react";
@@ -31,21 +31,10 @@ const features = [
 ];
 
 export default function FeatureCards() {
-  const heroRef = useRef(null);
   const sliderRef = useRef(null);
-  const [heroVisible, setHeroVisible] = useState(false);
   const [sliderVisible, setSliderVisible] = useState(false);
 
   useEffect(() => {
-    const heroObserver = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setHeroVisible(true);
-        }
-      },
-      { threshold: 0.1 },
-    );
-
     const sliderObserver = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -55,31 +44,27 @@ export default function FeatureCards() {
       { threshold: 0.1 },
     );
 
-    if (heroRef.current) heroObserver.observe(heroRef.current);
     if (sliderRef.current) sliderObserver.observe(sliderRef.current);
-
     return () => {
-      if (heroRef.current) heroObserver.unobserve(heroRef.current);
       if (sliderRef.current) sliderObserver.unobserve(sliderRef.current);
     };
   }, []);
 
   return (
     <>
-      {/* FEATURE SLIDER SECTION */}
       <section
         ref={sliderRef}
         className="py-12 sm:py-16 md:py-24 bg-white overflow-hidden font-montserrat"
       >
         <div className="max-w-[1900px] ml-auto px-4 sm:px-6 lg:px-8 overflow-visible">
-          {/* Swiper Container with Fade In */}
           <div
-            className={`transition-opacity duration-700 delay-100 ${sliderVisible ? "opacity-100" : "opacity-0"}`}
+            className={`transition-all duration-1000 ${sliderVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
           >
             <Swiper
-              modules={[Pagination]}
+              modules={[Pagination, Autoplay]}
               spaceBetween={80}
               slidesPerView={1.1}
+              autoplay={{ delay: 5000, disableOnInteraction: false }}
               pagination={{
                 clickable: true,
                 el: ".custom-pagination",
@@ -87,79 +72,48 @@ export default function FeatureCards() {
                 bulletActiveClass: "custom-bullet-active",
               }}
               breakpoints={{
-                320: {
-                  slidesPerView: 1,
-                  spaceBetween: 30,
-                },
-                480: {
-                  slidesPerView: 1.2,
-                  spaceBetween: 40,
-                },
-                640: {
-                  slidesPerView: 1.4,
-                  spaceBetween: 50,
-                },
-                768: {
-                  slidesPerView: 1.8,
-                  spaceBetween: 60,
-                },
-                1024: {
-                  slidesPerView: 2.5, // Show 2 full + half of third
-                  spaceBetween: 80,
-                },
-                1280: {
-                  slidesPerView: 2.5, // Maintain the half-hidden effect
-                  spaceBetween: 80,
-                },
-                1536: {
-                  slidesPerView: 2.5, // Maintain the half-hidden effect
-                  spaceBetween: 80,
-                },
+                320: { slidesPerView: 1, spaceBetween: 30 },
+                480: { slidesPerView: 1.2, spaceBetween: 40 },
+                640: { slidesPerView: 1.4, spaceBetween: 50 },
+                768: { slidesPerView: 1.8, spaceBetween: 60 },
+                1024: { slidesPerView: 2.5, spaceBetween: 80 },
               }}
             >
               {features.map((item, i) => (
                 <SwiperSlide key={i}>
-                  <div className="pr-4 sm:pr-6 md:pr-8">
-                    {/* Image with Scale In */}
-<div
-  className={`relative
-    w-full                     /* ✅ MOBILE – same as last time */
-    md:max-w-[clamp(480px,42vw,650px)]  /* ✅ LAPTOP + DESKTOP */
-    h-56
-    sm:h-64
-    md:h-[420px]
-    lg:h-[480px]
-    rounded-2xl sm:rounded-3xl overflow-hidden
-    mb-4 sm:mb-8 md:mb-12 lg:mb-16
-    transition-all duration-500 delay-${200 + i * 100}
-    ${sliderVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}
->
-
-
-
-
+                  <div className="pr-4 sm:pr-6 md:pr-8 group">
+                    {/* ENHANCED IMAGE CONTAINER */}
+                    <div
+                      className={`relative w-full md:max-w-[clamp(480px,42vw,650px)] h-56 sm:h-64 md:h-[420px] lg:h-[480px] rounded-3xl overflow-hidden mb-4 sm:mb-8 md:mb-12 transition-all duration-[1.2s] ease-out
+                        ${sliderVisible ? "opacity-100 scale-100 translate-x-0" : "opacity-0 scale-90 -translate-x-10"}`}
+                      style={{ transitionDelay: `${i * 150}ms` }}
+                    >
+                      {/* Shine Effect Overlay */}
+                      <div className="absolute inset-0 z-10 bg-gradient-to-tr from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
+                      
                       <Image
                         src={item.img}
                         alt={item.title}
                         fill
-                        className="object-cover transition-transform duration-500 hover:scale-110"
+                        className="object-cover transition-transform duration-1000 group-hover:scale-110 group-hover:rotate-1"
                       />
+                      
+                      {/* Subtle Bottom Vignette */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     </div>
 
-                    {/* Title with Slide Up */}
+                    {/* TEXT CONTENT WITH STAGGERED FADE */}
                     <div
-                      className={`transition-all duration-500 delay-${300 + i * 100} ${sliderVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"}`}
+                      className={`transition-all duration-700 ease-out ${sliderVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
+                      style={{ transitionDelay: `${400 + i * 150}ms` }}
                     >
-                      <h3 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-semibold mb-2 sm:mb-3 md:mb-4">
+                      <h3 className="relative inline-block text-lg sm:text-2xl md:text-3xl lg:text-4xl font-semibold mb-2 sm:mb-3 md:mb-4 tracking-tight">
                         {item.title}
+                        {/* THE RED LINE */}
+                        <span className="absolute left-0 bottom-[-4px] w-0 h-[3px] bg-red-500 transition-all duration-500 ease-out group-hover:w-full" />
                       </h3>
-                    </div>
-
-                    {/* Description with Slide Up */}
-                    <div
-                      className={`transition-all duration-500 delay-${400 + i * 100} ${sliderVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"}`}
-                    >
-                      <p className="max-w-7xl text-gray-900 font-medium text-xs sm:text-sm md:text-lg lg:text-xl xl:text-2xl leading-relaxed">
+                      
+                      <p className="max-w-7xl text-black font-medium text-xs sm:text-sm md:text-lg lg:text-xl xl:text-2xl leading-relaxed">
                         {item.desc}
                       </p>
                     </div>
@@ -169,75 +123,42 @@ export default function FeatureCards() {
             </Swiper>
           </div>
 
-          {/* LINE INDICATORS with Fade In */}
+          {/* PAGINATION INDICATORS */}
           <div
-            className={`custom-pagination flex items-center gap-2 sm:gap-3 md:gap-4 mt-8 sm:mt-12 transition-opacity duration-700 delay-600 ${sliderVisible ? "opacity-100" : "opacity-0"}`}
+            className={`custom-pagination flex items-center gap-2 sm:gap-3 md:gap-4 mt-8 sm:mt-12 transition-all duration-1000 delay-700 ${sliderVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
           ></div>
 
-          {/* Custom styles */}
+          {/* GLOBAL STYLES */}
           <style jsx global>{`
             .custom-bullet {
-              width: 40px;
+              width: 30px;
               height: 4px;
-              background: #d1d5db;
+              background: #e5e7eb;
               border-radius: 999px;
-              transition: all 0.3s ease;
+              transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
               cursor: pointer;
             }
 
             @media (min-width: 768px) {
-              .custom-bullet {
-                width: 52px;
-                height: 6px;
-              }
+              .custom-bullet { width: 60px; height: 5px; }
             }
 
             .custom-bullet-active {
-              width: 36px;
-              background: #ef4444;
+              width: 50px;
+              background: #ef4444; /* Your brand red */
+              box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
             }
 
             @media (min-width: 768px) {
-              .custom-bullet-active {
-                width: 48px;
-              }
+              .custom-bullet-active { width: 100px; }
             }
 
-            /* Hide overflow only on the right side for desktop */
-            @media (min-width: 1024px) {
-              .swiper {
-                overflow: visible;
-              }
-
-              .swiper-wrapper {
-                overflow: visible;
-              }
-            }
-
-            /* Delay classes */
-            .delay-200 {
-              transition-delay: 200ms;
-            }
-            .delay-300 {
-              transition-delay: 300ms;
-            }
-            .delay-400 {
-              transition-delay: 400ms;
-            }
-            .delay-500 {
-              transition-delay: 500ms;
-            }
-            .delay-600 {
-              transition-delay: 600ms;
-            }
-            .delay-700 {
-              transition-delay: 700ms;
-            }
-            .delay-800 {
-              transition-delay: 800ms;
-            }
-            .delay-900 {
-              transition-delay: 900ms;
+            .swiper { overflow: visible !important; }
+            
+            /* Ensures images look crisp and smooth during transform */
+            .swiper-slide {
+              backface-visibility: hidden;
+              -webkit-font-smoothing: subpixel-antialiased;
             }
           `}</style>
         </div>

@@ -1,10 +1,25 @@
+import Link from "next/link";
+import Image from "next/image";
+
 export default function Footer() {
   return (
     <footer className="bg-black text-white py-20 px-6 font-montserrat">
       <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-12 items-start">
         {/* LEFT BRAND */}
         <div>
-          <h2 className="text-2xl font-semibold mb-6">joulecube®</h2>
+          {/* LOGO */}
+          <div className="flex items-center shrink-0 z-10 mb-4">
+            <Link href="/">
+              <Image
+                src="/logo.png"
+                alt="Joulecube Logo"
+                width={220}
+                height={54}
+                priority
+                className="object-contain w-28 sm:w-32 md:w-36 lg:w-40 xl:w-48 2xl:w-56 h-auto"
+              />
+            </Link>
+          </div>
 
           <p className="text-gray-400 leading-relaxed max-w-sm">
             It is a long established fact that a reader will be distracted by
@@ -16,12 +31,14 @@ export default function Footer() {
         {/* CENTER LINKS */}
         <div className="md:border-l md:border-gray-700 md:pl-16">
           <ul className="space-y-3 text-gray-300">
-            <li>Home</li>
-            <li>Solutions</li>
-            <li>Contact</li>
-            <li>Resources</li>
-            <li>404</li>
-            <li>Terms and Conditions</li>
+            <li className="cursor-pointer hover:text-white">Home</li>
+            <li className="cursor-pointer hover:text-white">Solutions</li>
+            <li className="cursor-pointer hover:text-white">Contact</li>
+            <li className="cursor-pointer hover:text-white">Resources</li>
+            <li className="cursor-pointer hover:text-white">404</li>
+            <li className="cursor-pointer hover:text-white">
+              Terms and Conditions
+            </li>
           </ul>
         </div>
 
@@ -37,9 +54,9 @@ export default function Footer() {
 
           {/* SOCIAL ICONS */}
           <div className="flex gap-6 text-gray-300">
-            <span className="cursor-pointer">X</span>
-            <span className="cursor-pointer">in</span>
-            <span className="cursor-pointer">▶</span>
+            <span className="cursor-pointer hover:text-white">X</span>
+            <span className="cursor-pointer hover:text-white">in</span>
+            <span className="cursor-pointer hover:text-white">▶</span>
           </div>
         </div>
       </div>

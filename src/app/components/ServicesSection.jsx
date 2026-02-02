@@ -138,8 +138,8 @@ function ServiceCard({ icon, title, text, red }) {
   return (
     <div
       className={`rounded-3xl
-  p-5 -ml-10 sm:p-7 lg:p-10
-  w-full max-w-[80%] sm:max-w-full
+  p-5 sm:p-7 lg:p-10
+  w-full max-w-[%] sm:max-w-full
   mx-auto
   flex flex-col gap-4
   overflow-hidden

@@ -73,7 +73,7 @@ function ProcessCard({ icon, title, desc, active = false }) {
         {/* DESCRIPTION */}
         <p
           className={`text-base leading-relaxed
-          ${active ? "text-white/80" : "text-gray-600"}`}
+          ${active ? "text-white/80" : "text-black text-2xl font-medium "}`}
         >
           {desc}
         </p>
