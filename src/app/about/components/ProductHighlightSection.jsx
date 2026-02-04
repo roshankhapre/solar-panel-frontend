@@ -14,9 +14,12 @@ export default function ProductHighlightSection() {
   }, []);
 
   return (
-    <section className="w-full bg-white py-20 font-montserrat">
-      {/* WIDER CONTAINER */}
-      <div className="max-w-[1600px] mx-auto px-4 md:px-8">
+    // 🔒 CLAMP OVERFLOW HERE (MOST IMPORTANT)
+    <section className="w-full bg-white py-20 font-montserrat overflow-x-hidden">
+      
+      {/* CONTAINER */}
+      <div className="max-w-[1600px] mx-auto px-4 md:px-8 overflow-x-hidden">
+        
         {/* Top Heading */}
         <h2
           data-aos="fade-down"
@@ -25,8 +28,9 @@ export default function ProductHighlightSection() {
           Hithium Hiner – 125 kW / 261 kWh
         </h2>
 
-        {/* Top Grid Content */}
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+        {/* Grid Content */}
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-16 items-start overflow-x-hidden">
+          
           {/* Left Title */}
           <h3
             data-aos="fade-right"
@@ -50,15 +54,11 @@ export default function ProductHighlightSection() {
           </p>
         </div>
 
-        {/* IMAGE – BIGGER & STRONGER */}
+        {/* IMAGE */}
         <div
           data-aos="zoom-in"
           data-aos-delay="200"
-          className="
-            mt-20 mx-auto
-            w-full max-w-[1500px]
-            rounded-2xl overflow-hidden shadow-2xl
-          "
+          className="mt-20 mx-auto w-full max-w-[1500px] rounded-2xl overflow-hidden shadow-2xl"
         >
           <Image
             src="/hithium-hiner.png"
@@ -66,7 +66,7 @@ export default function ProductHighlightSection() {
             width={1600}
             height={800}
             priority
-            className="w-full h-auto object-cover"
+            className="w-full h-auto object-cover max-w-full"
           />
         </div>
       </div>

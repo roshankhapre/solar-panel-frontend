@@ -15,7 +15,7 @@ export default function Home() {
       <Hero />
       <Savings />
       <Maintenance />
-      <Durable/>
+      <Durable />
       <FeatureCards />
       <PowerBackup />
       <ServicesSection />

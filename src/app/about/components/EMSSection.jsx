@@ -14,9 +14,12 @@ export default function EMSSection() {
   }, []);
 
   return (
-    <section className="w-full bg-white py-20 font-montserrat">
-      {/* WIDER CONTAINER */}
-      <div className="max-w-[1600px] mx-auto px-4 md:px-8">
+    // 🔒 CLAMP ALL HORIZONTAL OVERFLOW (CRITICAL)
+    <section className="w-full bg-white py-20 font-montserrat overflow-x-hidden">
+      
+      {/* CONTAINER */}
+      <div className="max-w-[1600px] mx-auto px-4 md:px-8 overflow-x-hidden">
+        
         {/* Top Heading */}
         <h2
           data-aos="fade-down"
@@ -26,7 +29,8 @@ export default function EMSSection() {
         </h2>
 
         {/* Content Grid */}
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-16 items-start overflow-x-hidden">
+          
           {/* Left Title */}
           <h3
             data-aos="fade-right"
@@ -50,7 +54,7 @@ export default function EMSSection() {
           </p>
         </div>
 
-        {/* PRIMARY IMAGE – BIGGER */}
+        {/* PRIMARY IMAGE */}
         <div
           data-aos="zoom-in"
           data-aos-delay="200"
@@ -62,19 +66,16 @@ export default function EMSSection() {
             width={1600}
             height={800}
             priority
-            className="
-              w-full object-cover
-              h-[260px] sm:h-[320px] md:h-[420px] lg:h-auto
-            "
+            className="w-full object-cover h-[260px] sm:h-[320px] md:h-[420px] lg:h-auto max-w-full"
           />
         </div>
       </div>
 
-      {/* FULL-WIDTH SECOND IMAGE (UNCHANGED STYLE, JUST CLEANED) */}
+      {/* FULL-WIDTH IMAGE (SAFE VERSION) */}
       <div
         data-aos="fade-up"
         data-aos-delay="300"
-        className="relative w-full h-[360px] sm:h-[480px] md:h-[600px] lg:h-[750px] -mb-20 mt-24"
+        className="relative w-full max-w-full h-[360px] sm:h-[480px] md:h-[600px] lg:h-[750px] -mb-20 mt-24 overflow-x-hidden"
       >
         <Image
           src="/about2.png"
